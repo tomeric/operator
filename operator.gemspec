@@ -16,5 +16,13 @@ Gem::Specification.new do |gem|
   
   gem.files = Dir["{lib,spec}/**/*", "README*", "LICENSE*"] & `git ls-files -z`.split("\0")
 
-  gem.add_bundler_dependencies
+  gem.add_dependency "railties", "~> 3.0.0"
+  gem.add_dependency "json"
+  gem.add_dependency "httparty"
+
+  gem.add_development_dependency "rake"
+  gem.add_development_dependency "jeweler"
+  gem.add_development_dependency "yard"
+  gem.add_development_dependency "rspec", "= 2.0.0.beta.20"
+  gem.add_development_dependency "fakeweb"
 end

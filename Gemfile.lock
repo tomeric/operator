@@ -1,3 +1,11 @@
+PATH
+  remote: .
+  specs:
+    operator (0.0.0)
+      httparty
+      json
+      railties (~> 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -67,6 +75,7 @@ DEPENDENCIES
   httparty
   jeweler
   json
+  operator!
   railties (~> 3.0.0)
   rake
   rspec (= 2.0.0.beta.20)
