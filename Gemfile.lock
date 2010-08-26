@@ -2,6 +2,7 @@ PATH
   remote: .
   specs:
     operator (0.0.0)
+      activesupport (~> 3.0.0)
       httparty
       json
       railties (~> 3.0.0)
@@ -71,6 +72,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  activesupport (~> 3.0.0)
   fakeweb
   httparty
   jeweler

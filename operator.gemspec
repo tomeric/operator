@@ -16,7 +16,8 @@ Gem::Specification.new do |gem|
   
   gem.files = Dir["{lib,spec}/**/*", "README*", "LICENSE*"] & `git ls-files -z`.split("\0")
 
-  gem.add_dependency "railties", "~> 3.0.0"
+  gem.add_dependency "railties",      "~> 3.0.0"
+  gem.add_dependency "activesupport", "~> 3.0.0"
   gem.add_dependency "json"
   gem.add_dependency "httparty"
 
