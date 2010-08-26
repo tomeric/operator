@@ -2,12 +2,12 @@ module Operator
   class Publisher < Base    
     attr_accessor :message
     
-    def self.publishes_to(queue)
-      @@queue = queue
+    class << self
+      attr_accessor :queue
     end
-
-    def self.queue
-      defined?(@@queue) ? @@queue.to_s : nil
+    
+    def self.publishes_to(queue)
+      self.queue = queue.to_s
     end
     
     def publish!

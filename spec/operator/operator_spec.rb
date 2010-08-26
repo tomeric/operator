@@ -8,31 +8,16 @@ describe Operator::Publisher do
   describe "class methods" do
     describe "#publishes_to" do
       before(:each) do
-        @previous_queue = Operator::Publisher.send(:class_variable_get, :@@queue) rescue nil
+        @previous_queue = Operator::Publisher.queue rescue nil
       end
       
       after(:each) do
-        Operator::Publisher.send(:class_variable_set, :@@queue, @previous_queue)
+        Operator::Publisher.queue = @previous_queue
       end
       
-      it "sets the notification_server class variable" do
+      it "sets the queue as a string" do
         Operator::Publisher.publishes_to :queue_name
-        Operator::Publisher.send(:class_variable_get, :@@queue).should eql(:queue_name)
-      end
-    end 
-    
-    describe "#queue" do
-      before(:each) do
-        @previous_queue = Operator::Publisher.send(:class_variable_get, :@@queue) rescue nil
-      end
-      
-      after(:each) do
-        Operator::Publisher.send(:class_variable_set, :@@queue, @previous_queue)
-      end
-      
-      it "returns the queue as a string" do
-        Operator::Publisher.send(:class_variable_set, :@@queue, :awesome_queue)
-        Operator::Publisher.queue.should eql('awesome_queue')
+        Operator::Publisher.queue.should eql('queue_name')
       end
     end   
   end
