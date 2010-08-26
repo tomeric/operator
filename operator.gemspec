@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.email    = "tomeric@i76.nl"
   gem.homepage = "http://github.com/tomeric/operator"
   
-  gem.files = Dir["{lib,spec}/**/*", "README*", "LICENSE*"] & `git ls-files -z`.split("\0")
+  gem.files = Dir["{lib,spec}/**/*", "README*", "LICENSE*"]
 
   gem.add_dependency "railties",      "~> 3.0.0"
   gem.add_dependency "activesupport", "~> 3.0.0"
