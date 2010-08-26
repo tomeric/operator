@@ -29,10 +29,10 @@ module Operator
     end
     
     def endpoint
-      raise "please set #{self.class}.notification_server first" unless self.class.notification_server
-      raise "please set #{self.class}.api_key first"             unless self.class.api_key
+      raise "please set #{self.class}.notification_server or Operator::Base.notification_server first" unless notification_server
+      raise "please set #{self.class}.api_key or Operator::Base.api_key first"                         unless api_key
       
-      "#{self.class.notification_server}/notifications.json?api_key=#{self.class.api_key}"    
+      "#{notification_server}/notifications.json?api_key=#{api_key}"    
     end
   end
 end

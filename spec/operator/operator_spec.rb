@@ -27,7 +27,7 @@ describe Operator::Publisher do
       it "raises an error if the notification server is unknown" do
         lambda {
           @publisher.endpoint
-        }.should raise_error(/set Operator::Publisher.notification_server first/)
+        }.should raise_error(/set Operator::Publisher.notification_server or Operator::Base.notification_server first/)
       end
       
       it "raises an error if the API key is unknown" do
@@ -35,7 +35,7 @@ describe Operator::Publisher do
         
         lambda {
           @publisher.endpoint
-        }.should raise_error(/set Operator::Publisher.api_key first/)
+        }.should raise_error(/set Operator::Publisher.api_key or Operator::Base.api_key first/)
       end
       
       it "returns a proper endpoint that includes the notification server and the API key" do
