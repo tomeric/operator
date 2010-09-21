@@ -7,5 +7,6 @@ require 'active_support/core_ext'
 require 'operator/version'
 require 'operator/base'
 require 'operator/publisher'
+require 'operator/processor'
 
 $LOAD_PATH.shift
