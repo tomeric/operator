@@ -24,6 +24,6 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rake"
   gem.add_development_dependency "jeweler"
   gem.add_development_dependency "yard"
-  gem.add_development_dependency "rspec", "= 2.0.0.beta.20"
+  gem.add_development_dependency "rspec", "~> 2.0.0.beta.22"
   gem.add_development_dependency "fakeweb"
 end
