@@ -53,7 +53,7 @@ describe Operator::Publisher do
       end      
     end
     
-    describe "#publish!" do
+    describe "#publish" do
       before(:each) do
         @endpoint     = 'http://localhost:3000/notifications.json?api_key=the-api-key-is-awesome'
         @json_message = '{"hello":"world"}'
@@ -82,18 +82,18 @@ describe Operator::Publisher do
           :body => { :notification => { :message => @json_message, :queue => 'the_queue' } }
         ).and_return(succesful_response)
         
-        @publisher.publish!
+        @publisher.publish
       end
       
       it "returns true if the POST is succesful" do
         HTTParty.stub(:post).and_return(succesful_response)
-        @publisher.publish!.should be_true
+        @publisher.publish.should be_true
       end
       
       it "raises an error if the POST is unsuccesful" do
         HTTParty.stub(:post).and_return(unsuccesful_response)
         lambda {
-          @publisher.publish!
+          @publisher.publish
         }.should raise_error
       end
     end

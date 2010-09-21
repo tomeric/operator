@@ -7,7 +7,7 @@ module Operator
       self.queue = queue.to_s
     end
     
-    def publish!
+    def publish
       response = HTTParty.post(
         endpoint,
         :body => { 
