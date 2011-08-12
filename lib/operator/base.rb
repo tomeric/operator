@@ -1,7 +1,7 @@
 module Operator
   class Base
-    class_inheritable_accessor :notification_server
-    class_inheritable_accessor :api_key
+    class_attribute :notification_server
+    class_attribute :api_key
     
     def self.configure(hash)
       self.notification_server = hash[:notification_server]

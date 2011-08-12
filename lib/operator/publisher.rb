@@ -1,7 +1,7 @@
 module Operator
   class Publisher < Base    
     attr_accessor :message
-    class_inheritable_accessor :queue
+    class_attribute :queue
     
     def self.publishes_to(queue)
       self.queue = queue.to_s

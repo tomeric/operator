@@ -1,7 +1,7 @@
 module Operator
   class Processor
     attr_accessor :message
-    class_inheritable_accessor :queue
+    class_attribute :queue
     
     def initialize(message)
       self.message = message
