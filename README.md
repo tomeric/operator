@@ -1,11 +1,9 @@
-= operator
-
-== Description
+# Operator
 
 Operator is a Rails 3 plugin that simplifies sending and receiving messages to
-and from [transmitter][http://github.com/tomeric/transmitter].
+and from [transmitter](http://github.com/tomeric/transmitter).
 
-== Publishers
+## Publishers
 
 Publishers are used to publish messages to a transmitter server. They are very
 simple classes that are inherited from the Operator::Publisher class. When 
@@ -21,7 +19,7 @@ writing a publisher, you only need to define the queue and the message.
       end
     end
 
-== Subscribers
+## Subscribers
 
 Subscribers are used to process messages that are received. If you create a 
 subscriber, it will get it's own URL. The route to this URL will be created
@@ -42,14 +40,14 @@ to configure transmitter to send the messages to this URL.
         json = JSON.parse(body)
         
         Headline.create!(
-          :title   => json[:title],
-          :summary => json[:summary],
-          :url     => "http://localhost:3000/articles/#{message[:article_id]}.html"
+          title:   json[:title],
+          summary: json[:summary],
+          url:     "http://localhost:3000/articles/#{message[:article_id]}.html"
         ) 
       end
     end
 
-== Note on Patches/Pull Requests
+## Note on Patches/Pull Requests
  
 * Fork the project.
 * Make your feature addition or bug fix.
@@ -59,6 +57,6 @@ to configure transmitter to send the messages to this URL.
   (if you want to have your own version, that is fine but bump version in a commit by itself I can ignore when I pull)
 * Send me a pull request. Bonus points for topic branches.
 
-== Copyright
+## Copyright
 
 Copyright (c) 2010 Tom-Eric Gerritsen. See LICENSE for details.
