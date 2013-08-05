@@ -3,18 +3,18 @@ require 'spec_helper'
 describe Operator::Base do
   describe "inheritance" do
     before(:each) do
-      @previous_values = Operator::Base.notification_server, Operator::Base.api_key
+      @previous_values = Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger
       
       Operator::Base.notification_server = 'http://localhost'
       Operator::Base.api_key = 'the_api_key_is_awesome'
-    
+      
       class InheritedOperatorBase < Operator::Base
       end
     end 
     
     after(:each) do
       Object.send :remove_const, :InheritedOperatorBase
-      Operator::Base.notification_server, Operator::Base.api_key = @previous_values
+      Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger = @previous_values
     end    
 
     it "copies the notification_server when inherited" do
@@ -29,11 +29,11 @@ describe Operator::Base do
   describe "class methods" do
     describe "configure" do
       before(:each) do
-        @previous_values = Operator::Base.notification_server, Operator::Base.api_key
+        @previous_values = Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger
       end
 
       after(:each) do
-        Operator::Base.notification_server, Operator::Base.api_key = @previous_values
+        Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger = @previous_values
       end
       
       it "sets the notification server" do
@@ -50,13 +50,13 @@ describe Operator::Base do
   
   describe "instance methods" do
     before(:each) do
-      @previous_values = Operator::Base.notification_server, Operator::Base.api_key
+      @previous_values = Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger
       Operator::Base.configure(:notification_server => 'http://localhost:3000', :api_key => 'the_api_key_is_awesome')
       @instance = Operator::Base.new
     end
 
     after(:each) do
-      Operator::Base.notification_server, Operator::Base.api_key = @previous_values
+      Operator::Base.notification_server, Operator::Base.api_key, Operator::Base.logger = @previous_values
     end
 
     describe "notification_server" do

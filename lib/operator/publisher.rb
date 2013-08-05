@@ -1,5 +1,5 @@
 module Operator
-  class Publisher < Base    
+  class Publisher < Base
     attr_accessor :message
     class_attribute :queue
     
@@ -8,18 +8,23 @@ module Operator
     end
     
     def publish
-      response = HTTParty.post(
-        endpoint,
-        :body => { 
-          :notification => { :message => message_as_json, :queue => self.class.queue }
+      parameters = { 
+        :notification => {
+          :message => message_as_json,
+          :queue   => self.class.queue
         }
-      )
-
+      }
+      
+      logger.info "POST #{endpoint}\n  Parameters: #{parameters.inspect}"
+      
+      response     = HTTParty.post(endpoint, :body => parameters)
       notification = response.parsed_response
       
       if notification['message'] == message_as_json
+        logger.info "Success: #{notification.inspect}"
         return true
       else
+        logger.info "Failed: #{notification.inspect}"
         raise notification.inspect
       end
     end
