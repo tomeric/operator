@@ -53,7 +53,7 @@ describe Operator::Publisher do
       end      
     end
     
-    describe "#publish" do
+    context '#publishing' do
       before(:each) do
         @endpoint     = 'http://localhost:3000/notifications.json?api_key=the-api-key-is-awesome'
         @json_message = '{"hello":"world"}'
@@ -61,40 +61,53 @@ describe Operator::Publisher do
         
         @publisher.class.publishes_to @queue
         @publisher.stub(:endpoint).and_return(@endpoint)
-        @publisher.stub(:message_as_json).and_return(@json_message)        
+        @publisher.stub(:message_as_json).and_return(@json_message)
       end
       
       after(:each) do
         @publisher.class.publishes_to nil
       end
-      
+    
       def succesful_response
         mock('response', :parsed_response => { "message" => @json_message })
       end
-      
+    
       def unsuccesful_response
         mock('response', :parsed_response => { "queue" => "can't be blank" })
       end
-          
-      it "sends a POST to the Publisher's endpoint with correct notification attributes" do        
-        HTTParty.should_receive(:post).with(
-          @endpoint,
-          :body => { :notification => { :message => @json_message, :queue => 'the_queue' } }
-        ).and_return(succesful_response)
+      
+      describe "#publish" do
+        it "sends a POST to the Publisher's endpoint with correct notification attributes" do        
+          HTTParty.should_receive(:post).with(
+            @endpoint,
+            :body => { notification: { message: @json_message, queue: 'the_queue' } }
+          ).and_return(succesful_response)
         
-        @publisher.publish
-      end
-      
-      it "returns true if the POST is succesful" do
-        HTTParty.stub(:post).and_return(succesful_response)
-        @publisher.publish.should be_true
-      end
-      
-      it "raises an error if the POST is unsuccesful" do
-        HTTParty.stub(:post).and_return(unsuccesful_response)
-        lambda {
           @publisher.publish
-        }.should raise_error
+        end
+        
+        it "returns true if the POST is succesful" do
+          HTTParty.stub(:post).and_return(succesful_response)
+          @publisher.publish.should be_true
+        end
+        
+        it "raises an error if the POST is unsuccesful" do
+          HTTParty.stub(:post).and_return(unsuccesful_response)
+          lambda {
+            @publisher.publish
+          }.should raise_error
+        end
+      end
+      
+      describe '#publish_unique' do
+        it "sends a positive unique variable along" do
+          HTTParty.should_receive(:post).with(
+            @endpoint,
+            :body => { uniqueness: true, notification: { message: @json_message, queue: 'the_queue' } }
+          ).and_return(succesful_response)
+        
+          @publisher.publish_unique
+        end
       end
     end
   end
