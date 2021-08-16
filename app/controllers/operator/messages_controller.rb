@@ -8,21 +8,21 @@ module Operator
     #
     # If no `Processor` can be found, a 404 will be raised.
     #
-    # If any of the `Processor`s raise an exception, a 500 error will be 
-    # raised and the processing wilt stop immediately 
+    # If any of the `Processor`s raise an exception, a 500 error will be
+    # raised and the processing wilt stop immediately
     def create
       processors = Processor.subscribers_for(params[:queue])
-      
+
       if processors.empty?
         render :status => 404, :nothing => true
         return
       end
-      
+
       processors.each do |processor|
         processor.process(params[:message])
       end
-      
-      render :status => 200, :nothing => true
+
+      head :ok
     end
   end
 end
