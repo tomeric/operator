@@ -1,5 +1,8 @@
 module Operator
   class MessagesController < ActionController::Base
+
+    skip_before_action :verify_authenticity_token
+
     ##
     # POST /operator/:queue
     #
