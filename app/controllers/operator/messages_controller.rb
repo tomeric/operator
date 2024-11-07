@@ -17,7 +17,7 @@ module Operator
       processors = Processor.subscribers_for(params[:queue])
 
       if processors.empty?
-        render :status => 404, :nothing => true
+        head :not_found
         return
       end
 
