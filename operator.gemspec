@@ -16,8 +16,8 @@ Gem::Specification.new do |gem|
 
   gem.files = Dir["{lib,spec}/**/*", "README*", "LICENSE*"]
 
-  gem.add_dependency "railties",      ">= 3.0"
-  gem.add_dependency "activesupport", ">= 3.0"
+  gem.add_dependency "railties",      ">= 5.0"
+  gem.add_dependency "activesupport", ">= 5.0"
   gem.add_dependency "json",          ">=1.8.3"
   gem.add_dependency "httparty"
 
